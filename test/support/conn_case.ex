@@ -1,4 +1,4 @@
-defmodule ExUssdSimulatorWeb.ConnCase do
+defmodule ExUssdSimulator.Web.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule ExUssdSimulatorWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use ExUssdSimulatorWeb.ConnCase, async: true`, although
+  by setting `use ExUssdSimulator.Web.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,12 +22,12 @@ defmodule ExUssdSimulatorWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import ExUssdSimulatorWeb.ConnCase
+      import ExUssdSimulator.Web.ConnCase
 
-      alias ExUssdSimulatorWeb.Router.Helpers, as: Routes
+      alias ExUssdSimulator.Web.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint ExUssdSimulatorWeb.Endpoint
+      @endpoint ExUssdSimulator.Web.Endpoint
     end
   end
 

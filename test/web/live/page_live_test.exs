@@ -1,5 +1,5 @@
-defmodule ExUssdSimulatorWeb.PageLiveTest do
-  use ExUssdSimulatorWeb.ConnCase
+defmodule ExUssdSimulator.Web.PageLiveTest do
+  use ExUssdSimulator.Web.ConnCase
 
   import Phoenix.LiveViewTest
 

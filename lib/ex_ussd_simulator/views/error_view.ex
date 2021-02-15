@@ -1,5 +1,5 @@
-defmodule ExUssdSimulatorWeb.ErrorView do
-  use ExUssdSimulatorWeb, :view
+defmodule ExUssdSimulator.ErrorView do
+  use ExUssdSimulator.Web, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

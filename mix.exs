@@ -19,8 +19,7 @@ defmodule ExUssdSimulator.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {ExUssdSimulator.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      mod: {ExUssdSimulator.Application, []}
     ]
   end
 
@@ -38,10 +37,9 @@ defmodule ExUssdSimulator.MixProject do
       {:floki, ">= 0.27.0", only: :test},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:telemetry_metrics, "~> 0.4"},
-      {:telemetry_poller, "~> 0.4"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 
