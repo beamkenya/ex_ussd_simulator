@@ -10,7 +10,7 @@ Add the `:ex_ussd_simulator` package to your `deps` list in `mix.exs`:
 ```elixir
 defp deps do
   ...
-  {:ex_ussd_simulator, "~> 0.1.0", only: :dev}
+  {:ex_ussd_simulator, "~> 0.1.2", only: :dev}
   ...
 end
 ```
