@@ -15,8 +15,8 @@ config :ex_ussd_simulator, ExUssdSimulator.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/ex_ussd_simulator/(live|views)/.*(ex)$",
-      ~r"lib/ex_ussd_simulator/templates/.*(eex)$"
+      ~r"lib/(live|views)/.*(ex)$",
+      ~r"lib/templates/.*(eex)$"
     ]
   ]
 

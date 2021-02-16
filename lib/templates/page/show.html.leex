@@ -2,7 +2,7 @@
   <div class="w-full h-full max-h-phone max-w-xs relative">
     <div class="flex flex-col pt-16 pb-16 px-3 h-full relative z-10">
       <!--- Display --->
-      <div class="flex flex-col justify-center items-center flex-grow bg-gray-100 border-b-2 border-gray-300 rounded-t-lg">
+      <div class="flex flex-col justify-center items-center flex-grow bg-gray-200 border-b-2 border-gray-400 rounded-t-lg">
         <div class="text-lg font-normal leading-snug text-gray-800 break-words max-w-xs pb-3 px-6">
         <%= Phoenix.HTML.Format.text_to_html(@prompt) %>
         </div>
@@ -17,14 +17,15 @@
         <%= render "num_row.html", values: 7..9 %>
         <%= render "num_row.html", values: ["*", 0, "\#"] %>
         <div class="flex pt-1">
-          <div class="phone-button-reset text-gray-400" phx-click="reset">Reset</div>
+          <div class="phone-button-reset" phx-click="reset">Reset</div>
           <div class="phone-button-call" phx-click="call">Call</div>
-          <div class="phone-button-reset text-gray-400" phx-click="end_session">End</div>
+          <div class="phone-button-reset" phx-click="end_session">End</div>
         </div>
       </div>
     </div>
+    <!--- Phone layout --->
     <div class="absolute z-0 top-0 bottom-0 left-0 right-0">
-      <%= render "_phone.html", classes: "text-gray-300" %>
+      <%= render "_phone.html", classes: "text-gray-400" %>
     </div>
   </div>
 </section>

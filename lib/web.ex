@@ -23,7 +23,7 @@ defmodule ExUssdSimulator.Web do
 
       use Phoenix.View,
         namespace: ExUssdSimulator,
-        root: "lib/ex_ussd_simulator/templates"
+        root: "lib/templates"
 
       unquote(view_helpers())
     end
