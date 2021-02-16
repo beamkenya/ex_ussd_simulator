@@ -1,7 +1,11 @@
 defmodule ExUssdSimulator.PageLive do
   use ExUssdSimulator.Web, :live_view
 
-  @callback_url "http://localhost:4000/api/callback"
+  require Logger
+
+  alias ExUssdSimulator.Config
+
+  @callback_url_unavailable_error "This is a Test prompt. We could not access your ExUssd-Endpoint. Please make sure that you accept ExUssd-Calls at "
 
   @impl true
   def render(assigns), do: ExUssdSimulator.PageView.render("show.html", assigns)
@@ -51,18 +55,27 @@ defmodule ExUssdSimulator.PageLive do
   end
 
   defp execute_ussd_code(%{assigns: %{ussd_code: ussd_code, session_id: session_id}}) do
+    callback_url = Config.callback_url()
+    service_code = Config.service_code()
+    headers = [{"Content-Type", "application/json"}]
+
     body =
       %{
         text: ussd_code,
         sessionId: session_id,
-        serviceCode: "*123#"
+        serviceCode: service_code
       }
       |> Jason.encode!()
 
-    {:ok, %{body: prompt}} =
-      HTTPoison.post(@callback_url, body, [{"Content-Type", "application/json"}])
+    case HTTPoison.post(callback_url, body, headers) do
+      {:ok, %{body: prompt}} ->
+        prompt
 
-    prompt
+      error ->
+        Logger.error(inspect(error))
+
+        @callback_url_unavailable_error <> callback_url
+    end
   end
 
   defp reset_ussd_code(socket) do

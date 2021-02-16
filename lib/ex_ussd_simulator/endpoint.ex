@@ -5,20 +5,11 @@ defmodule ExUssdSimulator.Endpoint do
     url: [host: "localhost"],
     http: [port: 5123],
     check_origin: false,
+    code_reloader: true,
     debug_errors: true,
     secret_key_base: "3PdUemfBrX7aJXqxVnAXfE0kYAOCBKeCrTVhzlOXUxcYWbnIkoVyzfvqMkonZ8lL",
     live_view: [signing_salt: "FmP4_vbMsSj1AgdC"],
-    pubsub_server: ExUssdSimulator.PubSub,
-    watchers: [
-      node: [
-        "node_modules/webpack/bin/webpack.js",
-        "--mode",
-        "development",
-        "--color",
-        "--watch-stdin",
-        cd: Path.expand("../../assets", __DIR__)
-      ]
-    ]
+    pubsub_server: ExUssdSimulator.PubSub
   ]
 
   def init(:supervisor, opts) do
@@ -45,7 +36,13 @@ defmodule ExUssdSimulator.Endpoint do
     at: "/",
     from: :ex_ussd_simulator,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css js favicon.ico)
+
+  if code_reloading? do
+    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
+    plug Phoenix.LiveReloader
+    plug Phoenix.CodeReloader
+  end
 
   plug Plug.RequestId
 

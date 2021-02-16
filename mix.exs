@@ -51,7 +51,14 @@ defmodule ExUssdSimulator.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "cmd npm install --prefix assets"]
+      setup: ["deps.get", "cmd npm install --prefix assets"],
+      "assets.compile": &compile_assets/1
     ]
+  end
+
+  defp compile_assets(_args) do
+    Mix.shell().cmd(
+      ~S(cd ./assets; NODE_ENV=production ./node_modules/.bin/webpack --mode production)
+    )
   end
 end
