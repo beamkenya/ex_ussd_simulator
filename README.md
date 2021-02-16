@@ -25,13 +25,13 @@ config :ex_ussd_simulator,
   service_code: "*456#"
 ```
 
-Start your phoenix server with `mix phx.server`
-
-Now you can visit [`localhost:5123`](http://localhost:5123) from your browser.
+Start your phoenix server with `mix phx.server`. Now you can visit [`localhost:5123`](http://localhost:5123) from your browser.
 
 ### Why doesn't the simulator run at `localhost:4000`?
 
-We wanted to separate the `ExUssdSimulator` dependencies from your project dependencies as much as possible. Your project potentially runs a "headless" phoenix endpoint, that is without Phoenix Views or templates or Phoenix LiveView. That is API endpoints only. The `ExUssdSimulator` however, depends on Phoenix LiveView, which also needs to be configured. We did not want you to configure LiveView only to use the simulator, which is why we start a separate endpoint for the simulator in the `:dev`-environment only.
+We wanted to separate the `ExUssdSimulator` dependencies from your project dependencies as much as possible. Your project potentially runs a "headless" phoenix endpoint, that is without Phoenix Views or templates or Phoenix LiveView. That is, API endpoints only. 
+
+The `ExUssdSimulator` however, depends on Phoenix LiveView, which also needs to be configured. We did not want you to configure LiveView only to use the simulator, which is why we start a separate endpoint for the simulator in the `:dev`-environment only.
 
 ## Development
 
@@ -42,3 +42,8 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:5123`](http://localhost:5123) from your browser.
+
+### Important
+
+Please run `mix assets.compile` and push the changes in `priv/static/` before making any PRs.
+This ensures that we always keep the production versions of `app.css` and `app.js` in the library and not the larger development versions.
