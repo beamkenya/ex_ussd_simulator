@@ -10,7 +10,22 @@ defmodule ExUssdSimulator.MixProject do
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      description: "A development UI for ExUssd",
+      package: package()
+    ]
+  end
+
+  defp package do
+    [
+      name: "ex_ussd_simulator",
+      licenses: ["MIT"],
+      maintainers: [],
+      links: %{
+        "GitHub" => "https://github.com/PJUllrich/ex_ussd_simulator.git",
+        "README" => "https://hexdocs.pm/ex_ussd_simulator/readme.html"
+      },
+      homepage_url: "https://github.com/PJUllrich/ex_ussd_simulator"
     ]
   end
 
@@ -39,7 +54,8 @@ defmodule ExUssdSimulator.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:httpoison, "~> 1.8"}
+      {:httpoison, "~> 1.8"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 
