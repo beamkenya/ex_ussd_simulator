@@ -2,30 +2,30 @@
   <div class="w-full h-full max-h-phone max-w-xs relative">
     <div class="flex flex-col pt-16 pb-16 px-3 h-full relative z-10">
       <!--- Display --->
-      <div class="flex flex-col justify-center items-center flex-grow bg-gray-200 border-b-2 border-gray-400 rounded-t-lg">
-        <div class="text-lg font-normal leading-snug text-gray-800 break-words max-w-xs pb-3 px-6">
+      <div class="flex flex-col justify-center items-center flex-grow elevation-4 rounded-t-lg">
+        <div class="text-lg font-normal leading-snug emphasis-high break-words max-w-xs pb-3 px-6">
         <%= Phoenix.HTML.Format.text_to_html(@prompt) %>
         </div>
-        <div class="mt-2 text-xl font-normal text-black h-1">
+        <div class="mt-2 text-xl font-normal emphasis-high h-1">
           <%= Phoenix.HTML.Format.text_to_html(@ussd_code) %>
         </div>
       </div>
       <!--- Num pad --->
-      <div id="num-pad" class="flex flex-col rounded-b-3xl">
+      <div id="num-pad" class="flex flex-col elevation-4 pb-1">
         <%= render "num_row.html", values: 1..3 %>
         <%= render "num_row.html", values: 4..6 %>
         <%= render "num_row.html", values: 7..9 %>
         <%= render "num_row.html", values: ["*", 0, "\#"] %>
-        <div class="flex pt-1">
-          <div class="phone-button-reset" phx-click="reset">Reset</div>
-          <div class="phone-button-call" phx-click="call">Call</div>
-          <div class="phone-button-reset" phx-click="end_session">End</div>
-        </div>
+      </div>
+      <div class="flex pt-1">
+        <button class="phone-button-reset" phx-click="reset">Reset</button>
+        <button class="phone-button-call" phx-click="call">Call</button>
+        <button class="phone-button-reset" phx-click="end_session">End</button>
       </div>
     </div>
     <!--- Phone layout --->
     <div class="absolute z-0 top-0 bottom-0 left-0 right-0">
-      <%= render "_phone.html", classes: "text-gray-400" %>
+      <%= render "_phone.html", class: "text-elevation-1" %>
     </div>
   </div>
 </section>

@@ -16,7 +16,7 @@ defmodule ExUssdSimulator.PageLive do
   end
 
   @impl true
-  def handle_event("button_clicked", %{"value" => value}, socket) do
+  def handle_event("button_clicked", %{"val" => value}, socket) do
     {:noreply, update(socket, :ussd_code, &(&1 <> value))}
   end
 
