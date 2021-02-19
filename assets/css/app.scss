@@ -30,7 +30,7 @@ main {
     @apply bg-blue-500 text-white cursor-pointer;
   }
 
-  &-reset {
+  &-secondary {
     @extend .phone-button;
     @apply bg-transparent border-none text-sm emphasis-medium;
 

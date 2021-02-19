@@ -21,8 +21,8 @@ defmodule ExUssdSimulator.PageLive do
   end
 
   @impl true
-  def handle_event("reset", _params, socket) do
-    {:noreply, reset_ussd_code(socket)}
+  def handle_event("undo_last", _params, socket) do
+    {:noreply, update(socket, :ussd_code, fn code -> code |> String.split_at(-1) |> elem(0) end)}
   end
 
   @impl true

@@ -4,7 +4,7 @@ defmodule ExUssdSimulator.MixProject do
   def project do
     [
       app: :ex_ussd_simulator,
-      version: "0.1.3",
+      version: "0.1.4",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),

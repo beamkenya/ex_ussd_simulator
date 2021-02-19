@@ -18,9 +18,17 @@
         <%= render "num_row.html", values: ["*", 0, "\#"] %>
       </div>
       <div class="flex pt-1">
-        <button class="phone-button-reset" phx-click="reset">Reset</button>
-        <button class="phone-button-call" phx-click="call">Call</button>
-        <button class="phone-button-reset" phx-click="end_session">End</button>
+        <button class="phone-button-secondary" phx-click="undo_last" title="Remove the last digit or symbol">
+          <div class="h-7 w-7">
+            <%= render "_undo.html" %>
+          </div>
+        </button>
+        <button class="phone-button-call" phx-click="call" title="Execute the USSD Code">Call</button>
+        <button class="phone-button-secondary" phx-click="end_session" title="End the session and create a new one">
+          <div class="h-6 w-6">
+            <%= render "_refresh.html" %>
+          </div>
+        </button>
       </div>
     </div>
     <!--- Phone layout --->
