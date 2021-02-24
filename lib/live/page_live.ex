@@ -32,59 +32,24 @@ defmodule ExUssdSimulator.PageLive do
 
   @impl true
   def handle_event("call", _params, socket) do
-    {:noreply, execute(socket)}
+    {:noreply, build_menu(socket)}
+  end
+
+  def build_menu(socket) do
+    prompt = ExUssd.Utils.navigate(socket.assigns.ussd_code, socket.assigns.menu, socket.assigns.session_id, "*544#")
+    socket |> assign(prompt: prompt)
   end
 
   defp new_session(socket) do
     random_session_id = Enum.random(123_123_123..999_999_999)
+    opts = ExUssdSimulator.value()
+    IO.inspect opts
 
-    socket
+    socket = socket
     |> assign(session_id: random_session_id)
-    |> show_home_prompt()
+    |> assign(menu: opts[:menu])
+    |> assign(ussd_code: "")
+    |> build_menu()
   end
 
-  defp execute(socket) do
-    result = execute_ussd_code(socket)
-    set_prompt(socket, result)
-  end
-
-  defp show_home_prompt(socket) do
-    socket
-    |> reset_ussd_code()
-    |> execute()
-  end
-
-  defp execute_ussd_code(%{assigns: %{ussd_code: ussd_code, session_id: session_id}}) do
-    callback_url = Config.callback_url()
-    service_code = Config.service_code()
-    headers = [{"Content-Type", "application/json"}]
-
-    body =
-      %{
-        text: ussd_code,
-        sessionId: session_id,
-        serviceCode: service_code
-      }
-      |> Jason.encode!()
-
-    case HTTPoison.post(callback_url, body, headers) do
-      {:ok, %{body: prompt}} ->
-        prompt
-
-      error ->
-        Logger.error(inspect(error))
-
-        @callback_url_unavailable_error <> callback_url
-    end
-  end
-
-  defp reset_ussd_code(socket) do
-    assign(socket, ussd_code: "")
-  end
-
-  defp set_prompt(socket, prompt) do
-    socket
-    |> assign(prompt: prompt)
-    |> reset_ussd_code()
-  end
 end
