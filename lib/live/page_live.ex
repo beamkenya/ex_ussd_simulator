@@ -36,20 +36,45 @@ defmodule ExUssdSimulator.PageLive do
   end
 
   def build_menu(socket) do
-    prompt = ExUssd.Utils.navigate(socket.assigns.ussd_code, socket.assigns.menu, socket.assigns.session_id, "*544#")
+    prompt = ussd_response(socket)
     socket |> assign(prompt: prompt)
   end
 
   defp new_session(socket) do
     random_session_id = Enum.random(123_123_123..999_999_999)
     opts = ExUssdSimulator.value()
-    IO.inspect opts
 
-    socket = socket
-    |> assign(session_id: random_session_id)
-    |> assign(menu: opts[:menu])
-    |> assign(ussd_code: "")
-    |> build_menu()
+    socket =
+      socket
+      |> assign(session_id: random_session_id)
+      |> assign(menu: opts[:menu])
+      |> assign(ussd_code: "")
+      |> build_menu()
   end
 
+  def ussd_response(socket) do
+    internal_routing = %{
+      text: socket.assigns.ussd_code,
+      session_id: socket.assigns.session_id,
+      service_code: "*234#"
+    }
+
+    api_parameters = %{"text" => internal_routing.text, "phone_number" => "254722000000"}
+
+    route =
+      ExUssd.Routes.get_route(%{
+        text: internal_routing.text,
+        service_code: internal_routing.service_code
+      })
+
+    {:ok, %{menu_string: menu_string, should_close: _}} =
+      EXUssd.Common.goto(
+        internal_routing: internal_routing,
+        menu: socket.assigns.menu,
+        api_parameters: api_parameters,
+        route: route
+      )
+
+    menu_string
+  end
 end
