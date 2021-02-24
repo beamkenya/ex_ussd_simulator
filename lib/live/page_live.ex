@@ -67,7 +67,7 @@ defmodule ExUssdSimulator.PageLive do
         service_code: internal_routing.service_code
       })
 
-    {:ok, %{menu_string: menu_string, should_close: _}} =
+    %{display: menu_string, menu: %{should_close: _should_close}} =
       EXUssd.Common.goto(
         internal_routing: internal_routing,
         menu: socket.assigns.menu,
