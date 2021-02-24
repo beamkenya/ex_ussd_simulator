@@ -37,7 +37,7 @@ defmodule ExUssdSimulator.PageLive do
 
   def build_menu(socket) do
     prompt = ussd_response(socket)
-    socket |> assign(prompt: prompt)
+    socket |> assign(prompt: prompt) |> assign(ussd_code: "")
   end
 
   defp new_session(socket) do
