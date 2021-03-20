@@ -54,7 +54,7 @@ defmodule ExUssdSimulator.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:httpoison, "~> 1.8"},
+      # {:httpoison, "~> 1.8"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
